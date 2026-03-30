@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Static Website + CloudFront CDN | Brandon Brinson</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="index.html">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z"/></svg>
+    Brandon Brinson
+  </a>
+  <button class="nav-toggle" onclick="document.querySelector('.nav-links').classList.toggle('open')" aria-label="Menu">
+    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+  </button>
+  <ul class="nav-links">
+    <li><a href="index.html#about">About</a></li>
+    <li><a href="index.html#projects">Projects</a></li>
+    <li><a href="index.html#experience">Experience</a></li>
+    <li><a href="index.html#skills">Skills</a></li>
+    <li><a href="index.html#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- BREADCRUMB -->
+<div class="breadcrumb">
+  <a href="index.html">Home</a>
+  <span>›</span>
+  <a href="index.html#projects">Projects</a>
+  <span>›</span>
+  <span class="current">Static Website + CloudFront CDN</span>
+</div>
+
+<!-- PROJECT HERO -->
+<div class="proj-hero">
+  <div class="proj-hero-inner">
+    <div class="proj-badges">
+      <span class="proj-badge orange">AWS S3</span>
+      <span class="proj-badge orange">CloudFront</span>
+      <span class="proj-badge orange">ACM</span>
+      <span class="proj-badge orange">Route 53</span>
+      <span class="proj-badge blue">Terraform</span>
+      <span class="proj-badge green">GitHub Actions</span>
+      <span class="proj-badge purple">IAM</span>
+    </div>
+    <h1 class="proj-title">Secure Static Website Hosting with S3, CloudFront, ACM,<br>and Automated w/ Terraform</h1>
+    <p class="proj-summary">Built and deployed a secure, production-ready static website using Amazon S3 as the origin, Amazon CloudFront for global content delivery, AWS Certificate Manager for HTTPS, a CI/CD pipeline via GitHub Actions, and Terraform to provision and manage all infrastructure as a reusable template.</p>
+  </div>
+</div>
+
+<!-- QUICK SUMMARY -->
+<div class="detail-section alt">
+  <div class="detail-inner">
+    <span class="section-label">Overview</span>
+    <h2 class="section-title">Problem It <span class="gradient">Solves</span></h2>
+    <p style="color:#94a3b8;font-size:1rem;line-height:1.8;max-width:860px;">
+      Small business and portfolio websites need a hosting solution that is low cost, highly available, secure, and easy to update. This project solves that by using S3 for static storage, CloudFront for caching and global delivery, ACM for HTTPS encryption, and a CI/CD pipeline to automatically publish new content without manual uploads — along with Terraform to easily provision and manage all infrastructure.
+    </p>
+  </div>
+</div>
+
+<!-- GOALS -->
+<div class="detail-section">
+  <div class="detail-inner">
+    <span class="section-label">Goals &amp; Objectives</span>
+    <h2 class="section-title">What This <span class="gradient">Project Sets Out to Do</span></h2>
+    <div class="detail-list-2col">
+      <ul class="detail-list">
+        <li>Host a website in the cloud</li>
+        <li>Make it secure with HTTPS</li>
+        <li>Use AWS services in a production-style architecture</li>
+        <li>Use CloudFront to improve speed and global availability</li>
+      </ul>
+      <ul class="detail-list">
+        <li>Protect the origin by serving content through CloudFront only</li>
+        <li>Automate updates through a CI/CD pipeline</li>
+        <li>Demonstrate understanding of DNS, certificates, and deployment flow</li>
+        <li>Utilize Terraform to easily provision and manage infrastructure</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- ARCHITECTURE -->
+<div class="detail-section alt">
+  <div class="detail-inner">
+    <span class="section-label">Architecture</span>
+    <h2 class="section-title">How It All <span class="gradient">Fits Together</span></h2>
+
+    <div class="arch-section" style="margin-top:32px">
+      <p class="arch-title">Architecture Flow</p>
+      <h3 class="arch-h">User → DNS → CDN → Origin → CI/CD → Source Control</h3>
+      <p class="arch-p">Traffic flows from the user through Route 53, into CloudFront (with ACM-managed HTTPS), down to the private S3 origin. On the deployment side, a developer push triggers GitHub Actions which syncs files to S3 and invalidates the CloudFront cache.</p>
+      <div class="arch-flow-wrap">
+        <div class="arch-step">
+          <div class="arch-icon" style="background:rgba(99,102,241,0.15);border:1px solid rgba(99,102,241,0.3)">💻</div>
+          <div class="arch-step-name">Client</div>
+          <div class="arch-step-sub">Browser</div>
+        </div>
+        <div class="arch-arrow">→</div>
+        <div class="arch-step">
+          <div class="arch-icon" style="background:rgba(249,115,22,0.15);border:1px solid rgba(249,115,22,0.3)">🌐</div>
+          <div class="arch-step-name">Route 53</div>
+          <div class="arch-step-sub">DNS Routing</div>
+        </div>
+        <div class="arch-arrow">→</div>
+        <div class="arch-flow-col">
+          <div class="arch-flow-up">🔒 ACM Certificate</div>
+          <div class="arch-step">
+            <div class="arch-icon" style="background:rgba(168,85,247,0.15);border:1px solid rgba(168,85,247,0.3)">🔀</div>
+            <div class="arch-step-name">CloudFront</div>
+            <div class="arch-step-sub">CDN + HTTPS</div>
+          </div>
+        </div>
+        <div class="arch-arrow">→</div>
+        <div class="arch-step">
+          <div class="arch-icon s3">🪣</div>
+          <div class="arch-step-name">S3 Bucket</div>
+          <div class="arch-step-sub">Private Origin</div>
+        </div>
+        <div class="arch-arrow" style="color:#334155">←</div>
+        <div class="arch-step">
+          <div class="arch-icon" style="background:rgba(34,197,94,0.15);border:1px solid rgba(34,197,94,0.3)">⚙️</div>
+          <div class="arch-step-name">GitHub Actions</div>
+          <div class="arch-step-sub">CI/CD Pipeline</div>
+        </div>
+        <div class="arch-arrow" style="color:#334155">←</div>
+        <div class="arch-step">
+          <div class="arch-icon" style="background:rgba(59,130,246,0.15);border:1px solid rgba(59,130,246,0.3)">👨‍💻</div>
+          <div class="arch-step-name">Developer</div>
+          <div class="arch-step-sub">git push</div>
+        </div>
+      </div>
+    </div>
+
+    <div style="margin-top:32px;color:#94a3b8;font-size:0.95rem;line-height:1.8;max-width:860px;">
+      When a user visits the website domain, traffic is routed through Route 53 to a CloudFront distribution. CloudFront uses an ACM-managed SSL certificate so the site is always delivered over HTTPS. The CloudFront origin points to a private S3 bucket storing the static files (HTML, CSS, JS). When changes are pushed to the GitHub repository, the CI/CD pipeline uploads updated content to S3 and invalidates the CloudFront cache so users receive the latest version immediately.
+    </div>
+  </div>
+</div>
+
+<!-- SERVICES USED -->
+<div class="detail-section">
+  <div class="detail-inner">
+    <span class="section-label">Services &amp; Tools</span>
+    <h2 class="section-title">What Was <span class="gradient">Used</span></h2>
+    <div class="services-grid">
+      <div class="service-card">
+        <div class="service-icon">🪣</div>
+        <div class="service-name">Amazon S3</div>
+        <div class="service-desc">Stored the static website files as the private CloudFront origin</div>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">🔀</div>
+        <div class="service-name">Amazon CloudFront</div>
+        <div class="service-desc">Delivered the site globally with caching and HTTPS support</div>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">🔒</div>
+        <div class="service-name">AWS ACM</div>
+        <div class="service-desc">Managed the SSL/TLS certificate for secure HTTPS access</div>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">🌐</div>
+        <div class="service-name">Route 53</div>
+        <div class="service-desc">Managed DNS records for the custom domain</div>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">⚙️</div>
+        <div class="service-name">GitHub Actions</div>
+        <div class="service-desc">Automated the deployment pipeline on every push to main</div>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">🛡️</div>
+        <div class="service-name">IAM</div>
+        <div class="service-desc">Controlled permissions for deployment access</div>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">📦</div>
+        <div class="service-name">Terraform</div>
+        <div class="service-desc">Provisioned and managed all AWS resources as reusable IaC</div>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">🐙</div>
+        <div class="service-name">Git / GitHub</div>
+        <div class="service-desc">Managed source control and version history</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SKILLS + KEY CONCEPTS -->
+<div class="detail-section alt">
+  <div class="detail-inner">
+    <div class="detail-two-col">
+      <div>
+        <span class="section-label">Skills</span>
+        <h2 class="section-title" style="font-size:clamp(1.5rem,3vw,2rem)">Skills <span class="gradient">Demonstrated</span></h2>
+        <ul class="detail-list" style="margin-top:16px">
+          <li>AWS static hosting architecture</li>
+          <li>Terraform infrastructure setup and state management</li>
+          <li>CDN and edge delivery concepts</li>
+          <li>SSL/TLS certificate management</li>
+          <li>DNS and custom domain configuration</li>
+          <li>CI/CD pipeline design and automation</li>
+          <li>IAM permission handling for least-privilege access</li>
+          <li>Cloud troubleshooting and deployment validation</li>
+        </ul>
+      </div>
+      <div>
+        <span class="section-label">Concepts</span>
+        <h2 class="section-title" style="font-size:clamp(1.5rem,3vw,2rem)">Key Concepts <span class="gradient">Proven</span></h2>
+        <ul class="detail-list" style="margin-top:16px">
+          <li>Difference between S3 static website hosting endpoint vs S3 bucket origin</li>
+          <li>Why CloudFront is used in front of S3</li>
+          <li>Why ACM certificate must be attached to CloudFront (not S3) for HTTPS</li>
+          <li>Importance of cache invalidation after deployments</li>
+          <li>Role of DNS in routing a custom domain to CloudFront</li>
+          <li>Security benefits of using CloudFront + HTTPS over direct S3 access</li>
+          <li>Benefits of automation over manual deployments</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SECURITY -->
+<div class="detail-section">
+  <div class="detail-inner">
+    <span class="section-label">Security</span>
+    <h2 class="section-title">Security <span class="gradient">Considerations</span></h2>
+    <div class="learned-card" style="margin-top:24px">
+      <p>
+        This solution was secured by using HTTPS through ACM and CloudFront, which encrypts all traffic between the user and the edge location. IAM permissions were scoped to least-privilege to limit deployment access. The website content is stored in a private S3 bucket — the bucket is not publicly accessible and can only be read by the CloudFront distribution via an Origin Access Control (OAC) policy. This avoids exposing infrastructure like EC2 and ensures the origin is never directly reachable by end users.
+      </p>
+    </div>
+  </div>
+</div>
+
+<!-- CI/CD -->
+<div class="detail-section alt">
+  <div class="detail-inner">
+    <span class="section-label">Automation</span>
+    <h2 class="section-title">CI/CD <span class="gradient">Process</span></h2>
+    <p style="color:#94a3b8;font-size:0.95rem;line-height:1.8;max-width:800px;margin-top:16px">
+      The CI/CD pipeline is triggered when changes are pushed to the main branch in GitHub. The pipeline checks out the code, uploads the updated files to the S3 bucket, and invalidates the CloudFront cache so new content is served immediately. This removes the need for manual uploads and creates a repeatable, reliable deployment process.
+    </p>
+    <div class="cicd-flow">
+      <div class="cicd-step">Developer pushes code</div>
+      <div class="cicd-arrow">→</div>
+      <div class="cicd-step">GitHub Actions triggers</div>
+      <div class="cicd-arrow">→</div>
+      <div class="cicd-step">Files synced to S3</div>
+      <div class="cicd-arrow">→</div>
+      <div class="cicd-step">CloudFront cache invalidated</div>
+      <div class="cicd-arrow">→</div>
+      <div class="cicd-step">Updated site live for users</div>
+    </div>
+  </div>
+</div>
+
+<!-- CHALLENGES -->
+<div class="detail-section">
+  <div class="detail-inner">
+    <span class="section-label">Troubleshooting</span>
+    <h2 class="section-title">Challenges &amp; <span class="gradient">Solutions</span></h2>
+    <div style="margin-top:32px">
+
+      <div class="issue-card">
+        <div class="issue-row">
+          <span class="issue-label problem">Issue</span>
+          <span class="issue-text">HTTPS not working on the custom domain</span>
+        </div>
+        <div class="issue-row">
+          <span class="issue-label cause">Cause</span>
+          <span class="issue-text">ACM certificate was not attached correctly to the CloudFront distribution, or the certificate was requested in the wrong region (must be us-east-1 for CloudFront)</span>
+        </div>
+        <div class="issue-row">
+          <span class="issue-label fix">Fix</span>
+          <span class="issue-text">Requested and validated the certificate in us-east-1 via ACM, then associated it with the CloudFront distribution</span>
+        </div>
+        <div class="issue-row">
+          <span class="issue-label lesson">Lesson</span>
+          <span class="issue-text">CloudFront certificate setup has specific regional requirements — ACM certificates for CloudFront must always be in us-east-1 regardless of where the rest of your infrastructure lives</span>
+        </div>
+      </div>
+
+      <div class="issue-card">
+        <div class="issue-row">
+          <span class="issue-label problem">Issue</span>
+          <span class="issue-text">Website changes not showing after deployment</span>
+        </div>
+        <div class="issue-row">
+          <span class="issue-label cause">Cause</span>
+          <span class="issue-text">CloudFront was caching the old content at edge locations and continued serving stale files even after S3 was updated</span>
+        </div>
+        <div class="issue-row">
+          <span class="issue-label fix">Fix</span>
+          <span class="issue-text">Added a CloudFront cache invalidation step to the GitHub Actions pipeline (aws cloudfront create-invalidation) to run after every deployment</span>
+        </div>
+        <div class="issue-row">
+          <span class="issue-label lesson">Lesson</span>
+          <span class="issue-text">CDNs greatly improve performance but require active cache management as part of your deployment process</span>
+        </div>
+      </div>
+
+      <div class="issue-card">
+        <div class="issue-row">
+          <span class="issue-label problem">Issue</span>
+          <span class="issue-text">Access denied errors when CloudFront tried to read from S3</span>
+        </div>
+        <div class="issue-row">
+          <span class="issue-label cause">Cause</span>
+          <span class="issue-text">The S3 bucket policy was not configured to allow the CloudFront Origin Access Control (OAC) to read objects</span>
+        </div>
+        <div class="issue-row">
+          <span class="issue-label fix">Fix</span>
+          <span class="issue-text">Updated the S3 bucket policy to grant s3:GetObject to the CloudFront service principal, scoped to the specific distribution ARN</span>
+        </div>
+        <div class="issue-row">
+          <span class="issue-label lesson">Lesson</span>
+          <span class="issue-text">Security and access paths must be designed together — the OAC + bucket policy pattern is the modern, recommended way to lock down S3 origins</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- WHAT I LEARNED -->
+<div class="detail-section alt">
+  <div class="detail-inner">
+    <span class="section-label">Reflection</span>
+    <h2 class="section-title">What I <span class="gradient">Learned</span></h2>
+    <div class="learned-card" style="margin-top:24px">
+      <p>
+        Through this project I learned how S3, CloudFront, ACM, DNS, and CI/CD fit together to deliver a secure static website. It strengthened my understanding of edge delivery, certificate management, and deployment automation. I also gained hands-on experience with Terraform, learning how to express production AWS infrastructure as reusable, version-controlled code. This project demonstrated the difference between simply hosting a site and designing a proper, production-ready cloud solution — one that is secure, fast, globally distributed, and fully automated.
+      </p>
+    </div>
+  </div>
+</div>
+
+<!-- REPOSITORY -->
+<div class="detail-section">
+  <div class="detail-inner">
+    <span class="section-label">Source Code</span>
+    <h2 class="section-title">GitHub <span class="gradient">Repository</span></h2>
+    <a class="repo-card" href="https://github.com/Bpbrinson/Project_1_S3_Website_Hosting" target="_blank" rel="noopener noreferrer">
+      <div class="repo-card-icon">🐙</div>
+      <div>
+        <div class="repo-card-label">GitHub</div>
+        <div class="repo-card-name">Bpbrinson / Project_1_S3_Website_Hosting</div>
+      </div>
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#f97316" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+    </a>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">
+    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#f97316" stroke-width="2"><path d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z"/></svg>
+    Brandon Brinson
+  </div>
+  <p class="footer-copy">&copy; <span id="yr"></span> All rights reserved. Built on AWS ☁️</p>
+</footer>
+
+<script>
+  document.getElementById('yr').textContent = new Date().getFullYear();
+
+  document.querySelector('.nav-toggle').addEventListener('click', () => {
+    document.querySelector('.nav-links').classList.toggle('open');
+  });
+
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.style.opacity = '1';
+        entry.target.style.transform = 'translateY(0)';
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.service-card, .issue-card, .learned-card, .repo-card').forEach(el => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(20px)';
+    el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+    observer.observe(el);
+  });
+</script>
+</body>
+</html>
