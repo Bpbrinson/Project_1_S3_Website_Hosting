@@ -1,0 +1,50 @@
+#####################################
+# Terraform State Files (CRITICAL)
+#####################################
+*.tfstate
+*.tfstate.*
+
+# Crash logs
+crash.log
+
+#####################################
+# Sensitive Variables / Secrets
+#####################################
+*.tfvars
+*.tfvars.json
+
+# Exception: allow example files
+!*.example.tfvars
+
+#####################################
+# Terraform CLI Config Files
+#####################################
+.terraform/
+
+#####################################
+# Terraform Lock File (optional - see below)
+#####################################
+# Uncomment ONLY if you don't want to track provider versions
+# .terraform.lock.hcl
+
+#####################################
+# Override Files
+#####################################
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
+
+#####################################
+# CLI Configuration Files
+#####################################
+.terraformrc
+terraform.rc
+
+#####################################
+# OS / Editor Junk
+#####################################
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
