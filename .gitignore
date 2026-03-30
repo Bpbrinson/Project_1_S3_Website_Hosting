@@ -20,7 +20,7 @@ crash.log
 # Terraform CLI Config Files
 #####################################
 .terraform/
-.terraform
+
 
 #####################################
 # Terraform Lock File (optional - see below)
