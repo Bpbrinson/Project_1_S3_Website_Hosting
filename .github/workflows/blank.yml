@@ -18,7 +18,7 @@ jobs:
 
     env:
       AWS_REGION: us-east-1
-      S3_BUCKET: YOUR_BUCKET_NAME
+      S3_BUCKET: brinovax-s3-website-portfolio-7598
       CLOUDFRONT_DISTRIBUTION_ID: YOUR_DISTRIBUTION_ID
 
     steps:
