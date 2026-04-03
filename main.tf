@@ -193,3 +193,8 @@ resource "aws_route53_record" "portfolio_root" {
     evaluate_target_health = false
   }
 }
+
+###############################################################
+# SES Configuration for Email Notifications
+##############################################################
+

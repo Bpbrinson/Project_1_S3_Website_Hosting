@@ -31,3 +31,9 @@ variable "tags" {
   type = map(string)
   default = {}
 }
+
+variable "project_name" {
+  description = "Project name for tagging and resource naming"
+  type = string
+  default = "s3-website-hosting-project"
+}

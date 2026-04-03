@@ -17,7 +17,7 @@ async function submitForm(e) {
   status.style.display = 'none';
 
   try {
-    const res = await fetch(API_GATEWAY_URL, {
+    const res = await fetch('https://xsl4k1tae2.execute-api.us-east-1.amazonaws.com/contact', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ name, email, message })
